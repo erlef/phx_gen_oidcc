@@ -37,7 +37,7 @@ defmodule PhxGenOidcc.Patch.InjectMixDependencyTest do
                defp deps do
                  [
                    {:plug_cowboy, "~> 2.5"},
-                   {:oidcc_plug, "~> 0.1.0-alpha"}
+                   {:oidcc_plug, "~> 0.1.0-rc"}
                  ]
                end
              end
@@ -67,7 +67,7 @@ defmodule PhxGenOidcc.Patch.InjectMixDependencyTest do
   describe inspect(&InjectMixDependency.conflict_description/1) do
     test "works" do
       assert """
-             Add {:oidcc_plug, "~> 0.1.0-alpha"} to your project mix.exs.
+             Add {:oidcc_plug, "~> 0.1.0-rc"} to your project mix.exs.
              """ = InjectMixDependency.conflict_description(@opts)
     end
   end
