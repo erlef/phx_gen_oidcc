@@ -20,7 +20,7 @@ This library has taken some inspiration from
 <!--
 OpenID Certified by Jonatan Männchen at the Erlang Ecosystem Foundation for the
 basic and configuration profile of the OpenID Connect protocol. For details,
-check the [Conformance Documentation](https://github.com/erlef/oidcc/blob/main/conformance/HOWTO.md).
+check the [Conformance Documentation](https://github.com/erlef/oidcc/tree/openid-foundation-certification).
 
 ![OpenID Connect Certified Logo](https://raw.githubusercontent.com/Erlang-Openid/phx_gen_oidcc/main/assets/certified.svg)
 -->
