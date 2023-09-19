@@ -1,6 +1,15 @@
-<img align="left" src="https://raw.githubusercontent.com/Erlang-Openid/phx_gen_oidcc/main/assets/logo.svg" width="150px" style="margin-right: 15px">
+<div style="margin-right: 15px; float: left;">
+  <img
+    align="left"
+    src="assets/logo.svg"
+    alt="OpenID Connect Logo"
+    width="170px"
+  />
+</div>
 
 # Phx Gen Oidcc
+
+An OpenID Login Generator for Phoenix 1.7 Projects
 
 [![EEF Security WG project](https://img.shields.io/badge/EEF-Security-black)](https://github.com/erlef/security-wg)
 [![Main Branch](https://github.com/Erlang-Openid/phx_gen_oidcc/actions/workflows/branch_main.yml/badge.svg?branch=main)](https://github.com/Erlang-Openid/phx_gen_oidcc/actions/workflows/branch_main.yml)
@@ -10,30 +19,68 @@
 [![Last Updated](https://img.shields.io/github/last-commit/Erlang-Openid/phx_gen_oidcc.svg)](https://github.com/Erlang-Openid/phx_gen_oidcc/commits/master)
 [![Coverage Status](https://coveralls.io/repos/github/Erlang-Openid/phx_gen_oidcc/badge.svg?branch=main)](https://coveralls.io/github/Erlang-Openid/phx_gen_oidcc?branch=main)
 
-An OpenID Login Generator for Phoenix 1.7 Projects
-
-This library has taken some inspiration from
-[@aaronrenner](https://github.com/aaronrenner)'s
-[`phx_gen_auth`](https://github.com/aaronrenner/phx_gen_auth).
+<br clear="left"/>
 
 <!-- TODO: Uncomment after certification -->
 <!--
+<picture style="margin-right: 15px; float: left;">
+  <source
+    media="(prefers-color-scheme: dark)"
+    srcset="assets/certified-dark.svg"
+    width="170px"
+    align="left"
+  />
+  <source
+    media="(prefers-color-scheme: light)"
+    srcset="assets/certified-light.svg"
+    width="170px"
+    align="left"
+  />
+  <img
+    src="assets/certified-light.svg"
+    alt="OpenID Connect Certified Logo"
+    width="170px"
+    align="left"
+  />
+</picture>
+
 OpenID Certified by Jonatan Männchen at the Erlang Ecosystem Foundation for the
 basic and configuration profile of the OpenID Connect protocol. For details,
 check the [Conformance Documentation](https://github.com/erlef/oidcc/tree/openid-foundation-certification).
 
-![OpenID Connect Certified Logo](https://raw.githubusercontent.com/Erlang-Openid/phx_gen_oidcc/main/assets/certified.svg)
+<br clear="left"/>
 -->
 
-<picture style="margin-right: 15px; float: left">
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Erlang-Openid/phx_gen_oidcc/main/assets/erlef-logo-dark.svg" width="115px" align="left">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Erlang-Openid/phx_gen_oidcc/main/assets/erlef-logo-light.svg" width="115px" align="left">
-  <img alt="Erlang Ecosystem Foundation Logo" src="https://raw.githubusercontent.com/Erlang-Openid/phx_gen_oidcc/main/assets/erlef-logo-light.svg" width="115px" align="left">
+<picture style="margin-right: 15px; float: left;">
+  <source
+    media="(prefers-color-scheme: dark)"
+    srcset="assets/erlef-logo-dark.svg"
+    width="170px"
+    align="left"
+  />
+  <source
+    media="(prefers-color-scheme: light)"
+    srcset="assets/erlef-logo-light.svg"
+    width="170px"
+    align="left"
+  />
+  <img
+    src="assets/erlef-logo-light.svg"
+    alt="Erlang Ecosystem Foundation Logo"
+    width="170px"
+    align="left"
+  />
 </picture>
 
 The development of the library and the certification is funded as an
 [Erlang Ecosystem Foundation](https://erlef.org/) stipend entered by the
 [Security Working Group](https://erlef.org/wg/security).
+
+<br clear="left"/>
+
+This library has taken some inspiration from
+[@aaronrenner](https://github.com/aaronrenner)'s
+[`phx_gen_auth`](https://github.com/aaronrenner/phx_gen_auth).
 
 ## Overview
 
