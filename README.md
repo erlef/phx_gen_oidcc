@@ -12,12 +12,12 @@
 An OpenID Login Generator for Phoenix 1.7 Projects
 
 [![EEF Security WG project](https://img.shields.io/badge/EEF-Security-black)](https://github.com/erlef/security-wg)
-[![Main Branch](https://github.com/Erlang-Openid/phx_gen_oidcc/actions/workflows/branch_main.yml/badge.svg?branch=main)](https://github.com/Erlang-Openid/phx_gen_oidcc/actions/workflows/branch_main.yml)
+[![Main Branch](https://github.com/erlef/phx_gen_oidcc/actions/workflows/branch_main.yml/badge.svg?branch=main)](https://github.com/erlef/phx_gen_oidcc/actions/workflows/branch_main.yml)
 [![Module Version](https://img.shields.io/hexpm/v/phx_gen_oidcc.svg)](https://hex.pm/packages/phx_gen_oidcc)
 [![Total Download](https://img.shields.io/hexpm/dt/phx_gen_oidcc.svg)](https://hex.pm/packages/phx_gen_oidcc)
-[![License](https://img.shields.io/hexpm/l/phx_gen_oidcc.svg)](https://github.com/Erlang-Openid/phx_gen_oidcc/blob/main/LICENSE)
-[![Last Updated](https://img.shields.io/github/last-commit/Erlang-Openid/phx_gen_oidcc.svg)](https://github.com/Erlang-Openid/phx_gen_oidcc/commits/master)
-[![Coverage Status](https://coveralls.io/repos/github/Erlang-Openid/phx_gen_oidcc/badge.svg?branch=main)](https://coveralls.io/github/Erlang-Openid/phx_gen_oidcc?branch=main)
+[![License](https://img.shields.io/hexpm/l/phx_gen_oidcc.svg)](https://github.com/erlef/phx_gen_oidcc/blob/main/LICENSE)
+[![Last Updated](https://img.shields.io/github/last-commit/erlef/phx_gen_oidcc.svg)](https://github.com/erlef/phx_gen_oidcc/commits/master)
+[![Coverage Status](https://coveralls.io/repos/github/erlef/phx_gen_oidcc/badge.svg?branch=main)](https://coveralls.io/github/erlef/phx_gen_oidcc?branch=main)
 
 <br clear="left"/>
 

@@ -9,7 +9,7 @@ defmodule PhxGenOidcc.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       name: "Phx Gen Oidcc",
-      source_url: "https://github.com/Erlang-Openid/phx_gen_oidcc",
+      source_url: "https://github.com/erlef/phx_gen_oidcc",
       docs: &docs/0,
       description: """
       Plug Integration for the oidcc OpenID Connect Library
@@ -51,7 +51,7 @@ defmodule PhxGenOidcc.MixProject do
         "priv/templates"
       ],
       licenses: ["Apache-2.0"],
-      links: %{"Github" => "https://github.com/Erlang-Openid/phx_gen_oidcc"}
+      links: %{"Github" => "https://github.com/erlef/phx_gen_oidcc"}
     ]
   end
 
