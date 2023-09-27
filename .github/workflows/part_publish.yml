@@ -1,12 +1,6 @@
 on:
   workflow_call:
     inputs:
-      otpVersion:
-        required: true
-        type: string
-      elixirVersion:
-        required: true
-        type: string
       releaseName:
         required: false
         type: string
@@ -29,20 +23,20 @@ jobs:
       - uses: erlef/setup-beam@v1
         id: setupBEAM
         with:
-          otp-version: ${{ inputs.otpVersion }}
-          elixir-version: ${{ inputs.elixirVersion }}
+          version-file: .tool-versions
+          version-type: strict
       - uses: actions/cache@v3
         with:
           path: _build
-          key: mix_hex_publish-build-${{ runner.os }}-${{ steps.setupBEAM.outputs.otp-version }}-${{ hashFiles('mix.exs') }}
+          key: mix_hex_publish-build-${{ runner.os }}-${{ steps.setupBEAM.outputs.otp-version }}-${{ steps.setupBEAM.outputs.elixir-version }}-${{ hashFiles('mix.exs') }}
           restore-keys: |
-            mix_hex_publish-build-${{ runner.os }}-${{ steps.setupBEAM.outputs.otp-version }}-
+            mix_hex_publish-build-${{ runner.os }}-${{ steps.setupBEAM.outputs.otp-version }}-${{ steps.setupBEAM.outputs.elixir-version }}-
       - uses: actions/cache@v3
         with:
           path: deps
-          key: mix_hex_publish-deps-${{ runner.os }}-${{ steps.setupBEAM.outputs.otp-version }}-${{ hashFiles('mix.exs') }}
+          key: mix_hex_publish-deps-${{ runner.os }}-${{ steps.setupBEAM.outputs.otp-version }}-${{ steps.setupBEAM.outputs.elixir-version }}-${{ hashFiles('mix.exs') }}
           restore-keys: |
-            mix_hex_publish-deps-${{ runner.os }}-${{ steps.setupBEAM.outputs.otp-version }}-
+            mix_hex_publish-deps-${{ runner.os }}-${{ steps.setupBEAM.outputs.otp-version }}-${{ steps.setupBEAM.outputs.elixir-version }}-
       - run: mix deps.get
       - run: mix hex.publish --yes
         env:
@@ -58,20 +52,20 @@ jobs:
       - uses: erlef/setup-beam@v1
         id: setupBEAM
         with:
-          otp-version: ${{ inputs.otpVersion }}
-          elixir-version: ${{ inputs.elixirVersion }}
+          version-file: .tool-versions
+          version-type: strict
       - uses: actions/cache@v3
         with:
           path: _build
-          key: mix_hex_build-build-${{ runner.os }}-${{ steps.setupBEAM.outputs.otp-version }}-${{ hashFiles('mix.exs') }}
+          key: mix_hex_build-build-${{ runner.os }}-${{ steps.setupBEAM.outputs.otp-version }}-${{ steps.setupBEAM.outputs.elixir-version }}-${{ hashFiles('mix.exs') }}
           restore-keys: |
-            mix_hex_build-build-${{ runner.os }}-${{ steps.setupBEAM.outputs.otp-version }}-
+            mix_hex_build-build-${{ runner.os }}-${{ steps.setupBEAM.outputs.otp-version }}-${{ steps.setupBEAM.outputs.elixir-version }}-
       - uses: actions/cache@v3
         with:
           path: deps
-          key: mix_hex_build-deps-${{ runner.os }}-${{ steps.setupBEAM.outputs.otp-version }}-${{ hashFiles('mix.exs') }}
+          key: mix_hex_build-deps-${{ runner.os }}-${{ steps.setupBEAM.outputs.otp-version }}-${{ steps.setupBEAM.outputs.elixir-version }}-${{ hashFiles('mix.exs') }}
           restore-keys: |
-            mix_hex_build-deps-${{ runner.os }}-${{ steps.setupBEAM.outputs.otp-version }}-
+            mix_hex_build-deps-${{ runner.os }}-${{ steps.setupBEAM.outputs.otp-version }}-${{ steps.setupBEAM.outputs.elixir-version }}-
       - run: mix deps.get
       - run: mix hex.build --output package.tar
       - uses: actions/upload-artifact@v3
