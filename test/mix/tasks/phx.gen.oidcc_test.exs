@@ -2,24 +2,25 @@ defmodule Mix.Tasks.Phx.Gen.OidccTest do
   use ExUnit.Case, async: false
 
   @moduletag :integration
+  @moduletag timeout: :timer.minutes(10)
 
   import ExUnit.CaptureIO
 
-  alias Mix.Tasks.Phx.Gen.Oidcc, as: GenTask
   alias PhxGenOidcc.Patch.InjectMixDependency
+
+  @fixture_dir Application.app_dir(:phx_gen_oidcc, "priv/test/projects")
 
   setup %{test: test} = tags do
     cwd = File.cwd!()
 
     app_name = test |> Atom.to_string() |> String.replace(~r/[^\w]/iu, "_") |> String.to_atom()
 
-    fixture_dir = Application.app_dir(:phx_gen_oidcc, "priv/test/projects")
-    app_dir = Path.join(fixture_dir, to_string(app_name))
+    app_dir = Path.join(@fixture_dir, to_string(app_name))
 
     File.rm_rf!(app_dir)
-    File.mkdir_p!(fixture_dir)
+    File.mkdir_p!(@fixture_dir)
 
-    File.cd!(fixture_dir)
+    File.cd!(@fixture_dir)
 
     phx_new_opts =
       Map.get(tags, :phx_new_opts, [
@@ -45,33 +46,26 @@ defmodule Mix.Tasks.Phx.Gen.OidccTest do
     {:ok, app_dir: app_dir, app_name: app_name}
   end
 
-  test "works", %{app_name: app_name, app_dir: app_dir} do
+  test "works", %{app_dir: app_dir} do
     %{"clientId" => client_id, "clientSecret" => client_secret} =
       :phx_gen_oidcc
       |> Application.app_dir("priv/test/fixtures/zitadel-client.json")
       |> File.read!()
       |> Jason.decode!()
 
-    in_project(app_name, app_dir, fn _mix_module ->
-      InjectMixDependency.apply(
-        "mix.exs",
-        %{},
-        quote do
-          {:phx_gen_oidcc, path: "../../../.."}
-        end
-      )
-
-      capture_io(fn ->
-        GenTask.run(
-          [
-            "SampleApp.GoogleOpendIdProviderConfig",
-            "https://erlef-test-w4a8z2.zitadel.cloud",
-            client_id,
-            client_secret
-          ],
-          recompile?: false
-        )
-      end)
+    in_project(app_dir, fn ->
+      assert {_out, 0} =
+               System.cmd(
+                 "mix",
+                 [
+                   "phx.gen.oidcc",
+                   "SampleApp.GoogleOpendIdProviderConfig",
+                   "https://erlef-test-w4a8z2.zitadel.cloud",
+                   client_id,
+                   client_secret
+                 ],
+                 into: IO.stream()
+               )
 
       assert File.read!("mix.exs") =~ "oidcc_plug"
     end)
@@ -84,75 +78,76 @@ defmodule Mix.Tasks.Phx.Gen.OidccTest do
          "--no-ecto",
          "--no-mailer"
        ]
-  test "raises without html", %{app_name: app_name, app_dir: app_dir} do
+  test "raises without html", %{app_dir: app_dir} do
     %{"clientId" => client_id, "clientSecret" => client_secret} =
       :phx_gen_oidcc
       |> Application.app_dir("priv/test/fixtures/zitadel-client.json")
       |> File.read!()
       |> Jason.decode!()
 
-    in_project(app_name, app_dir, fn _mix_module ->
-      InjectMixDependency.apply(
-        "mix.exs",
-        %{},
-        quote do
-          {:phx_gen_oidcc, path: "../../../.."}
-        end
-      )
-
-      assert_raise Mix.Error, fn ->
-        capture_io(fn ->
-          GenTask.run(
-            [
-              "SampleApp.GoogleOpendIdProviderConfig",
-              "https://erlef-test-w4a8z2.zitadel.cloud",
-              client_id,
-              client_secret
-            ],
-            recompile?: false
-          )
-        end)
-      end
+    in_project(app_dir, fn ->
+      capture_io(fn ->
+        assert {_out, 1} =
+                 System.cmd(
+                   "mix",
+                   [
+                     "phx.gen.oidcc",
+                     "SampleApp.GoogleOpendIdProviderConfig",
+                     "https://erlef-test-w4a8z2.zitadel.cloud",
+                     client_id,
+                     client_secret
+                   ],
+                   into: IO.stream(),
+                   stderr_to_stdout: true
+                 )
+      end) =~ "contains html templates"
 
       refute File.read!("mix.exs") =~ "oidcc_plug"
     end)
   end
 
-  test "raises wit incorrect arguments", %{app_name: app_name, app_dir: app_dir} do
-    in_project(app_name, app_dir, fn _mix_module ->
-      InjectMixDependency.apply(
-        "mix.exs",
-        %{},
-        quote do
-          {:phx_gen_oidcc, path: "../../../.."}
-        end
-      )
-
-      assert_raise Mix.Error, fn ->
-        capture_io(fn ->
-          GenTask.run(
-            [
-              "SampleApp.GoogleOpendIdProviderConfig",
-              "https://erlef-test-w4a8z2.zitadel.cloud"
-            ],
-            recompile?: false
-          )
-        end)
-      end
+  test "raises wit incorrect arguments", %{app_dir: app_dir} do
+    in_project(app_dir, fn ->
+      capture_io(fn ->
+        assert {_out, 1} =
+                 System.cmd(
+                   "mix",
+                   [
+                     "phx.gen.oidcc",
+                     "SampleApp.GoogleOpendIdProviderConfig",
+                     "https://erlef-test-w4a8z2.zitadel.cloud"
+                   ],
+                   into: IO.stream(),
+                   stderr_to_stdout: true
+                 )
+      end) =~ "Invalid arguments"
 
       refute File.read!("mix.exs") =~ "oidcc_plug"
     end)
   end
 
-  defp in_project(app, path, fun) do
-    %{name: name, file: file} = Mix.Project.pop()
+  defp in_project(path, fun) do
+    cwd = File.cwd!()
 
     try do
-      capture_io(:stderr, fn ->
-        Mix.Project.in_project(app, path, [], fun)
+      File.cd!(path)
+
+      InjectMixDependency.apply(
+        "mix.exs",
+        %{},
+        quote do
+          {:phx_gen_oidcc, path: "../../../.."}
+        end
+      )
+
+      capture_io(fn ->
+        {_out, 0} = System.cmd("mix", ["deps.get"], into: IO.stream())
+        {_out, 0} = System.cmd("mix", ["compile"], into: IO.stream())
       end)
+
+      fun.()
     after
-      Mix.Project.push(name, file)
+      File.cd!(cwd)
     end
   end
 end

@@ -26,7 +26,9 @@ defmodule Mix.Tasks.Phx.Gen.Oidcc do
   @switches []
 
   @impl Mix.Task
-  def run(args, test_opts \\ []) do
+  def run(args) do
+    Application.load(:phx_gen_oidcc)
+
     if Mix.Project.umbrella?() do
       Mix.raise("mix phx.gen.auth can only be run inside an application directory")
     end
@@ -50,10 +52,6 @@ defmodule Mix.Tasks.Phx.Gen.Oidcc do
         client_secret: client_secret
       )
       |> Map.new()
-
-    if Keyword.get(test_opts, :recompile?, true) do
-      Mix.Task.run("compile")
-    end
 
     validate_required_dependencies!()
 
@@ -165,10 +163,10 @@ defmodule Mix.Tasks.Phx.Gen.Oidcc do
 
     For example:
 
-        mix phx.gen.oidcc \
-          MyApp.ConfigProviderName \
-          "https://isser.example.com" \
-          "client_id" \
+        mix phx.gen.oidcc \\
+          MyApp.ConfigProviderName \\
+          "https://isser.example.com" \\
+          "client_id" \\
           "client_secret"
     """)
   end

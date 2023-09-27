@@ -75,6 +75,7 @@ defmodule PhxGenOidcc.MixProject do
       {:briefly, "~> 0.4.1", only: :test},
       {:phx_new, "~> 1.7", only: :test, runtime: false},
       {:phoenix, "~> 1.7"},
+      {:phoenix_live_view, "~> 0.20.0", only: :test},
       {:ex_doc, "~> 0.29.4", only: :dev, runtime: false},
       {:excoveralls, "~> 0.17.1", only: :test, runtime: false},
       {:dialyxir, "~> 1.4", only: :dev, runtime: false},
