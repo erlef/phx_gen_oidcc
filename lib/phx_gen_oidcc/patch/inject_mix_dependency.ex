@@ -47,12 +47,12 @@ defmodule PhxGenOidcc.Patch.InjectMixDependency do
   @impl PhxGenOidcc.Patch
   def conflict_description(_opts),
     do: """
-    Add {:oidcc_plug, "~> 0.1.0-rc"} to your project mix.exs.
+    Add {:oidcc_plug, "~> 0.1.0"} to your project mix.exs.
     """
 
   defp default_dependency do
     quote do
-      {:oidcc_plug, "~> 0.1.0-rc"}
+      {:oidcc_plug, "~> 0.1.0"}
     end
   end
 end
