@@ -21,8 +21,6 @@ An OpenID Login Generator for Phoenix 1.7 Projects
 
 <br clear="left"/>
 
-<!-- TODO: Uncomment after certification -->
-<!--
 <picture style="margin-right: 15px; float: left;">
   <source
     media="(prefers-color-scheme: dark)"
@@ -44,12 +42,13 @@ An OpenID Login Generator for Phoenix 1.7 Projects
   />
 </picture>
 
-OpenID Certified by Jonatan Männchen at the Erlang Ecosystem Foundation for the
-basic and configuration profile of the OpenID Connect protocol. For details,
-check the [Conformance Documentation](https://github.com/erlef/oidcc/tree/openid-foundation-certification).
+OpenID Certified by [Jonatan Männchen](https://github.com/maennchen) at the
+[Erlang Ecosystem Foundation](https://github.com/erlef) of multiple Relaying
+Party conformance profiles of the OpenID Connect protocol:
+For details, check the
+[Conformance Documentation](https://github.com/erlef/oidcc/tree/openid-foundation-certification).
 
 <br clear="left"/>
--->
 
 <picture style="margin-right: 15px; float: left;">
   <source
