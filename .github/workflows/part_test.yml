@@ -98,7 +98,7 @@ jobs:
       - run: mix coveralls.multiple --type html --type github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: mix_test-coverage
           path: cover/
