@@ -116,7 +116,7 @@ can install the authentication system with the following command
 ```console
 $ mix phx.gen.oidcc \
     MyApp.ConfigProviderName \
-    "https://isser.example.com" \
+    "https://issuer.example.com" \
     "client_id" \
     "client_secret"
 ```
