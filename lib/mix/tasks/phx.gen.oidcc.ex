@@ -7,7 +7,7 @@ defmodule Mix.Tasks.Phx.Gen.Oidcc do
   ```console
   $ mix phx.gen.oidcc \\
       MyApp.ConfigProviderName \\\
-      "https://isser.example.com" \\
+      "https://issuer.example.com" \\
       "client_id" \\
       "client_secret"
   ```
@@ -159,13 +159,13 @@ defmodule Mix.Tasks.Phx.Gen.Oidcc do
     #{msg}
 
     mix phx.gen.oidcc expects a provider configuration worker name, followed by
-    the isser, client id and client secret.
+    the issuer, client id and client secret.
 
     For example:
 
         mix phx.gen.oidcc \\
           MyApp.ConfigProviderName \\
-          "https://isser.example.com" \\
+          "https://issuer.example.com" \\
           "client_id" \\
           "client_secret"
     """)
